@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Rubik's Cube Solver</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <h1>Rubik's Cube Solver</h1>
 
-<div id="cube">
-    <!-- Cube faces will be rendered here -->
+<div id="cube-container">
+    
 </div>
 
-<div class="controls">
-    <button onclick="move('U')">U</button>
-    <button onclick="move('D')">D</button>
-    <button onclick="move('L')">L</button>
-    <button onclick="move('R')">R</button>
-    <button onclick="shuffle()">Shuffle</button>
-    <button onclick="resetCube()">Reset</button>
-</div>
+<button id="solveBtn">Solve</button>
 
 <script src="script.js"></script>
 </body>

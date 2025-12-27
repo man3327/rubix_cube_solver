@@ -1,38 +1,41 @@
-// Cube represented as a simple face (3x3)
-// Later you can extend to full 6 faces
-let cube = Array(9).fill("white");
+const colors = ["white", "red", "blue", "green", "orange", "yellow"];
 
-function renderCube() {
-    const cubeDiv = document.getElementById("cube");
-    cubeDiv.innerHTML = "";
+const cubeContainer = document.getElementById("cube-container");
 
-    cube.forEach(color => {
-        const div = document.createElement("div");
-        div.className = "square";
-        div.style.backgroundColor = color;
-        cubeDiv.appendChild(div);
-    });
-}
+// 6 faces × 9 squares
+const cubeState = Array.from({ length: 6 }, () => Array(9).fill(null));
 
-function move(type) {
-    // Skeleton for moves
-    console.log("Move:", type);
+function createCube() {
+    for (let face = 0; face < 6; face++) {
+        const faceDiv = document.createElement("div");
+        faceDiv.className = "face";
 
-    // Example dummy rotation
-    cube.push(cube.shift());
-    renderCube();
-}
+        for (let i = 0; i < 9; i++) {
+            const square = document.createElement("div");
+            square.className = "square";
+            square.dataset.face = face;
+            square.dataset.index = i;
+            square.dataset.colorIndex = -1;
 
-function shuffle() {
-    for (let i = 0; i < 20; i++) {
-        move("random");
+            square.addEventListener("click", () => {
+                let nextColor =
+                    (parseInt(square.dataset.colorIndex) + 1) % colors.length;
+
+                square.dataset.colorIndex = nextColor;
+                square.style.backgroundColor = colors[nextColor];
+                cubeState[face][i] = colors[nextColor];
+            });
+
+            faceDiv.appendChild(square);
+        }
+
+        cubeContainer.appendChild(faceDiv);
     }
 }
 
-function resetCube() {
-    cube = Array(9).fill("white");
-    renderCube();
-}
+document.getElementById("solveBtn").addEventListener("click", () => {
+    console.log("Current Cube State:", cubeState);
+    alert("Solve logic will come next 🚀");
+});
 
-// Initial render
-renderCube();
+createCube();
